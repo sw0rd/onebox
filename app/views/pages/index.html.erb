@@ -1,0 +1,21 @@
+<% title "Pages" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Url</th>
+    <th>Body</th>
+    <th>Query</th>
+  </tr>
+  <% for page in @pages %>
+    <tr>
+      <td><%= page.name %></td>
+      <td><%= page.url %></td>
+      <td><%= page.body %></td>
+      <td><%= page.query %></td>
+      <td><%= link_to "Destroy", page, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Page", new_page_path %></p>

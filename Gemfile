@@ -8,8 +8,10 @@ gem 'rails', '3.0.4'
 gem 'sqlite3'
 gem 'mysql'
 gem 'omniauth'
+gem 'simple_form'
 
 group :development, :test do
   gem 'nifty-generators'
   gem 'ruby-debug19'
 end
+gem "mocha", :group => :test

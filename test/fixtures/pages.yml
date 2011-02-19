@@ -1,0 +1,11 @@
+one:
+  name: MyString
+  url: MyString
+  body: MyText
+  query: MyString
+
+two:
+  name: MyString
+  url: MyString
+  body: MyText
+  query: MyString
