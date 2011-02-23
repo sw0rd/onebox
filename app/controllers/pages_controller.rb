@@ -1,8 +1,13 @@
 class PagesController < ApplicationController
   def index
-    @pages = Page.all
+    @pages = Page.page(params[:page])
   end
 
+  def show
+    @page = Page.find(params[:id])
+    @page.update_yahoo    
+  end
+  
   def new
     @page = Page.new
   end

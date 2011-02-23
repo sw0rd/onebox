@@ -1,21 +1,25 @@
 <% title "Pages" %>
 
+<%= paginate @pages %>
+<p>
 <table>
   <tr>
     <th>Name</th>
-    <th>Url</th>
-    <th>Body</th>
     <th>Query</th>
+    <th>Category</th>
+    <th>Link</th>
   </tr>
   <% for page in @pages %>
     <tr>
-      <td><%= page.name %></td>
-      <td><%= page.url %></td>
-      <td><%= page.body %></td>
+      <td><%= link_to page.name, page_path(page.id) %></td>
       <td><%= page.query %></td>
+      <td><%= page.category %></td>
+      <td><%= link_to "url", page.url %></td>      
       <td><%= link_to "Destroy", page, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
+<p>
+<%= paginate @pages %>
 
 <p><%= link_to "New Page", new_page_path %></p>

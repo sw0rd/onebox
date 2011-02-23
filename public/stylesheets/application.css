@@ -73,3 +73,10 @@ a {
 .error_messages ul {
   margin: 0;
 }
+
+
+.auction_thumb {
+	float: left;
+	width: 180px;
+	margin: 0 6px 10px 4px;
+}

@@ -1,0 +1,14 @@
+<% javascript 'jquery.translate.min' %>
+<% javascript 'translate' %>
+
+
+<% title @page.name %>
+
+<% @page.auctions.each do |auction| %>
+  <div class="auction_thumb">
+    <div class="title"><%= auction.title %></div> <br>
+    <%= link_to image_tag(auction.image_icon), auction_path(auction.auction_id) %> <br>
+    <%= auction.current_price %> <br>
+  </div>
+<% end %>
+
