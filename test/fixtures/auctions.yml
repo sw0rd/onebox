@@ -1,11 +1,33 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+one:
+  title: MyString
+  auction_id: MyString
+  url: MyString
+  image_icon: MyString
+  seller: MyString
+  page_id: 1
+  rating: 1
+  closed_date: 2011-02-23 23:53:26
+  closed_price: 9.99
+  current_price: 9.99
+  description: MyText
+  buy_price: 9.99
+  start_time: 2011-02-23 23:53:26
+  end_time: 2011-02-23 23:53:26
+
+two:
+  title: MyString
+  auction_id: MyString
+  url: MyString
+  image_icon: MyString
+  seller: MyString
+  page_id: 1
+  rating: 1
+  closed_date: 2011-02-23 23:53:26
+  closed_price: 9.99
+  current_price: 9.99
+  description: MyText
+  buy_price: 9.99
+  start_time: 2011-02-23 23:53:26
+  end_time: 2011-02-23 23:53:26

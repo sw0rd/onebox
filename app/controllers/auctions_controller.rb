@@ -1,7 +1,10 @@
 class AuctionsController < ApplicationController  
   def show
-    @auction = Auction.find(params[:id])
-    @auction = Auction.find_by_auction_id(params[:id]) if @auction.nil
-    
+    begin
+      @auction = Auction.find_or_create_by_auction_id(params[:id])
+      @auction.fetch_from_yahoo
+    rescue OpenURI::HTTPError
+      redirect_to root_path
+    end
   end
 end

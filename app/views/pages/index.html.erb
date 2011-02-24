@@ -11,7 +11,7 @@
   </tr>
   <% for page in @pages %>
     <tr>
-      <td><%= link_to page.name, page_path(page.id) %></td>
+      <td><%= link_to page.name, page_path(page) %></td>
       <td><%= page.query %></td>
       <td><%= page.category %></td>
       <td><%= link_to "url", page.url %></td>      
