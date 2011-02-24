@@ -1,0 +1,20 @@
+<% javascript 'jquery.translate.min' %>
+<% javascript 'translate' %>
+
+
+<% title @auction.title %>
+Seller: <%= @auction.seller %>(<%= @auction.rating %>) <br>
+Price: <%= @auction.current_price %> <br>
+Start Time: <%= @auction.start_time %> <br>
+End Time: <%= @auction.end_time %> <br>
+Time Left: <%= @auction.time_left %> <br>
+<p>
+<div class=images>
+  <% @auction.images.each do |img| %>
+    <%= image_tag(img.image) %>
+  <% end %>
+</div>
+
+<div id="desc">
+  <%= @auction.description.html_safe unless @auction.description.empty? %>
+</div>
