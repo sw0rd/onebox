@@ -10,8 +10,8 @@ End Time: <%= @auction.end_time %> <br>
 Time Left: <%= @auction.time_left %> <br>
 <p>
 <div class=images>
-  <% @auction.images.each do |img| %>
-    <%= image_tag(img.image) %>
+  <% @auction.images.each do |image| %>
+    <%= image_tag(image) %>
   <% end %>
 </div>
 

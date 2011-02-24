@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  auction_id: 1
-  image: MyString
-
-two:
-  auction_id: 1
-  image: MyString
