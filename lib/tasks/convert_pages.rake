@@ -19,6 +19,9 @@ task :convert_pages => :environment do
           euc = query.to_s.gsub(/desc=/, '')
           page.query = ec.convert(CGI::unescape(euc))
         end
+        if auccat = url.match(/auccat=\d+/)
+          page.category = auccat.to_s.gsub(/auccat=/, '')
+        end
         page.url = url
         page.save
       end

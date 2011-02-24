@@ -23,9 +23,12 @@
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <% end %>
       <%= content_tag :h1, yield(:title) if show_title? %>
-      <%= yield %>
-    </div>
-
+      <% begin %>
+        <%= yield  %>
+      <% rescue %>
+        <%= yield.force_encoding("ASCII-8BIT") %>
+      <% end %>
+    </div>  
   </body>
 </html>
 

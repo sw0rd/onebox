@@ -1,14 +1,19 @@
 class Page < ActiveRecord::Base
   include YahooHelper
-  
+
   attr_accessible :name, :url, :body, :query, :category
   attr_accessor :auctions
+
+  acts_as_taggable
   
   def update_yahoo
-    url = yahoo_search_by_query(query) unless query.nil?
-    url = yahoo_search_by_category(category) unless category.nil?
-    doc = Nokogiri::XML(open(url))
+    begin
+      doc = Nokogiri::XML(open(yahoo_search(query, category)))
+    rescue OpenURI::HTTPError # not found in yahoo
+      return false
+    end
     parse_search_result(doc)
+    true
   end
 
   def to_param
@@ -27,6 +32,4 @@ class Page < ActiveRecord::Base
                                :image_icon => item.xpath('.//Image').inner_text.strip)
     end
   end
-
-  
 end

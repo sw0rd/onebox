@@ -5,7 +5,10 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.find(params[:id])
-    @page.update_yahoo    
+    if not @page.update_yahoo
+      redirect_to @page.url
+    end
+    
   end
   
   def new
@@ -25,5 +28,23 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     @page.destroy
     redirect_to pages_url, :notice => "Successfully destroyed page."
+  end
+  
+  
+  def search
+    @pages = Page.where(true)
+    params[:query].split('+').each do |text|
+      @pages = @pages.where("name like ?", "%#{text}%")
+    end
+    
+    if @pages.nil? || @pages.count == 0
+      query = params[:query].gsub(/\+/, ' ')
+      Page.create(:name => "Auctions related to #{query}", :query => query)
+      @pages = Page.where(:query => query)
+    end
+    
+    redirect_to page_path(@pages[0]) if @pages.count == 1  # Jump to page if only one result is shown
+    
+    @pages = @pages.page(params[:page])
   end
 end
