@@ -1,15 +1,21 @@
 class Page < ActiveRecord::Base
   include YahooHelper
 
-  attr_accessible :name, :url, :body, :query, :category
+  attr_accessible :name, :url, :body, :query, :category, :published
   attr_accessor :auctions
-
+  
   acts_as_taggable
+
+  default_scope where(:published => true)
+
+  validates_presence_of :name, :on => :create, :message => "can't be blank"
   
   def update_yahoo
     begin
+      logger.debug yahoo_search(query, category)
       doc = Nokogiri::XML(open(yahoo_search(query, category)))
     rescue OpenURI::HTTPError # not found in yahoo
+      update_attributes(:published => false)
       return false
     end
     parse_search_result(doc)

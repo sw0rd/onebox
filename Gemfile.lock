@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/ryanb/cancan.git
+  revision: 79995e43090849b72e147258a6c9e5cfc54226b4
+  specs:
+    cancan (1.5.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -145,12 +151,14 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.24)
+    yaml_db (0.2.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   acts-as-taggable-on
+  cancan!
   chronic_duration
   kaminari
   mechanize
@@ -164,3 +172,4 @@ DEPENDENCIES
   ruby-debug19
   simple_form
   sqlite3
+  yaml_db

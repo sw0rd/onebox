@@ -14,6 +14,8 @@ gem 'nokogiri'
 gem 'chronic_duration'
 gem 'acts-as-taggable-on'
 gem 'mechanize'
+gem 'cancan', :git => 'git://github.com/ryanb/cancan.git'
+gem 'yaml_db'
 
 group :development, :test do
   gem 'nifty-generators'

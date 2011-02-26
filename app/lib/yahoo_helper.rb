@@ -13,6 +13,7 @@ module YahooHelper
   end
   
   def yahoo_search_by_query(query, category, page=1)
+    query = query.gsub(/\+/, ' \+')
     if category.nil?
       "http://auctions.yahooapis.jp/AuctionWebService/V2/search?query=#{CGI::escape(query)}&appid=#{YAHOO_API}&page=#{page}"
     else

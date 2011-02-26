@@ -10,7 +10,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110224180842) do
+ActiveRecord::Schema.define(:version => 20110225123849) do
+
+  create_table "addresses", :force => true do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.integer  "country_id"
+    t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "countries", :force => true do |t|
+    t.string   "iso_name"
+    t.string   "iso"
+    t.string   "name"
+    t.string   "iso3"
+    t.integer  "numcode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pages", :force => true do |t|
     t.string   "name"
@@ -20,9 +44,11 @@ ActiveRecord::Schema.define(:version => 20110224180842) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "category"
-    t.integer  "published"
+    t.integer  "published",  :default => 1
+    t.integer  "pagetype",   :default => 0
   end
 
+  add_index "pages", ["pagetype"], :name => "index_pages_on_pagetype"
   add_index "pages", ["published"], :name => "index_pages_on_published"
 
   create_table "taggings", :force => true do |t|

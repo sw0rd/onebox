@@ -8,7 +8,6 @@ class PagesController < ApplicationController
     if not @page.update_yahoo
       redirect_to @page.url
     end
-    
   end
   
   def new
@@ -40,11 +39,9 @@ class PagesController < ApplicationController
     if @pages.nil? || @pages.count == 0
       query = params[:query].gsub(/\+/, ' ')
       Page.create(:name => "Auctions related to #{query}", :query => query)
-      @pages = Page.where(:query => query)
+      @pages = Page.where(:query => query).page(params[:page])
     end
-    
     redirect_to page_path(@pages[0]) if @pages.count == 1  # Jump to page if only one result is shown
-    
-    @pages = @pages.page(params[:page])
+    @pages = @pages.page(params[:page])    
   end
 end
