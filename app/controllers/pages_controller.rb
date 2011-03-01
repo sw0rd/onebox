@@ -5,7 +5,7 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.find(params[:id])
-    if not @page.fetch_yahoo
+    if not @page.fetch_yahoo(:json)
       redirect_to @page.url
     end
   end

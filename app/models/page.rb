@@ -10,16 +10,16 @@ class Page < ActiveRecord::Base
 
   validates_presence_of :name, :on => :create, :message => "can't be blank"
   
-  def fetch_yahoo
+  def fetch_yahoo(format = :json)
     begin
-      # logger.debug yahoo_search(query, category)
-      doc = Nokogiri::XML(open(yahoo_search(query, category)))
+      url = yahoo_search(:query => query, :category => category, :page => 1, :format => format)
+      logger.debug "YAHOO ====== " + url
+      buffer = open(url)
     rescue OpenURI::HTTPError # not found in yahoo
       update_attributes(:published => false)
       return false
     end
-    parse_search_result(doc)
-    true
+    @auctions = Auction.parse_search_result(buffer, format)
   end
 
   def to_param
@@ -27,15 +27,4 @@ class Page < ActiveRecord::Base
   end
 
   private
-  def parse_search_result(doc)
-    doc.remove_namespaces!
-
-    @auctions = Array.new
-    doc.xpath('//Item').each do |item|
-      @auctions << Auction.new(:auction_id => item.xpath('.//AuctionID').inner_text.strip, 
-                               :title => item.xpath('.//Title').inner_text.strip,
-                               :current_price => item.xpath('.//CurrentPrice').inner_text.strip.to_f,
-                               :image_icon => item.xpath('.//Image').inner_text.strip)
-    end
-  end
 end
