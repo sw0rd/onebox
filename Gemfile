@@ -14,12 +14,16 @@ gem 'nokogiri'
 gem 'chronic_duration'
 gem 'acts-as-taggable-on'
 gem 'mechanize'
+gem 'rd_searchlogic'
+gem 'meta_where'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git'
-gem 'yaml_db'
 
 group :development, :test do
   gem 'nifty-generators'
   gem 'ruby-debug19'
   gem 'mongrel'
+  gem 'mocha'
+  gem 'yaml_db'
+  gem 'faker'
+  gem 'hirb'
 end
-gem "mocha", :group => :test

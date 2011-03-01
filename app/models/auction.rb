@@ -27,7 +27,7 @@ class Auction
     end
   end
 
-  def fetch_from_yahoo    
+  def fetch_yahoo    
     page = Nokogiri::XML(open(yahoo_auction_details(@auction_id)))
     page.remove_namespaces!
     @title = google_translate(page.xpath('//Title').inner_text.strip)
@@ -35,7 +35,7 @@ class Auction
     @rating = page.xpath('//Seller/Rating/Point').inner_text
     @images = Array.new
     1.upto 3 do |index|
-      @images << page.xpath("//Image#{index}").inner_text
+      @images << page.xpath("//Image#{index}").inner_text unless page.xpath("//Image#{index}").empty?
     end
     @description = page.xpath('//Description').inner_text
     @current_price = page.xpath('//Price').inner_text

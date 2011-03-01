@@ -3,4 +3,7 @@ class Address < ActiveRecord::Base
   
   validates :firstname, :lastname, :address1, :city, :zipcode, :country, :phone, :presence => true
 
+  def fullname
+    "#{firstname} #{lastname}"
+  end
 end

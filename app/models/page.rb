@@ -10,9 +10,9 @@ class Page < ActiveRecord::Base
 
   validates_presence_of :name, :on => :create, :message => "can't be blank"
   
-  def update_yahoo
+  def fetch_yahoo
     begin
-      logger.debug yahoo_search(query, category)
+      # logger.debug yahoo_search(query, category)
       doc = Nokogiri::XML(open(yahoo_search(query, category)))
     rescue OpenURI::HTTPError # not found in yahoo
       update_attributes(:published => false)

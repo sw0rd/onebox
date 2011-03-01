@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Onebox::Application.load_tasks
+Japify::Application.load_tasks
