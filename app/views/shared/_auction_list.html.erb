@@ -1,8 +1,9 @@
-
-<% @page.auctions.each do |auction| %>
+<% paginate_auctions %>
+<p>
+<% @page.auctions['auctions'].each do |auction| %>
   <div class="auction_thumb_list">
-    <div class="title"><%= auction.title %></div> <br>
-    <%= link_to image_tag(auction.image_icon), auction_path(auction) %> <br>
+    <%= link_to image_tag(auction.image_icon), auction_path(auction) %> 
+    <%= auction.title %>
     <%= yen auction.current_price %> <br>
   </div>
 <% end %>

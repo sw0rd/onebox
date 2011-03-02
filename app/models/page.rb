@@ -1,6 +1,7 @@
 class Page < ActiveRecord::Base
   include YahooHelper
-
+  belongs_to :seller
+  
   attr_accessible :name, :url, :body, :query, :category, :published
   attr_accessor :auctions
   
@@ -9,10 +10,14 @@ class Page < ActiveRecord::Base
   default_scope where(:published => true)
 
   validates_presence_of :name, :on => :create, :message => "can't be blank"
-  
-  def fetch_yahoo(format = :json)
+
+
+  def fetch_yahoo(page = 1, format = :json)
     begin
-      url = yahoo_search(:query => query, :category => category, :page => 1, :format => format)
+      url = yahoo_search(:query => query, 
+                         :category => category, 
+                         :seller => self.seller ? self.seller.name : nil,
+                         :page => page, :format => format)
       logger.debug "YAHOO ====== " + url
       buffer = open(url)
     rescue OpenURI::HTTPError # not found in yahoo
@@ -23,8 +28,7 @@ class Page < ActiveRecord::Base
   end
 
   def to_param
-    "#{id}-#{name.gsub(/[^a-z0-9]+/i, '-').downcase}"
+    "#{id}-#{name.gsub(/[^a-z0-9]+/i, '-').gsub(/\-$/, '').downcase}"
   end
 
-  private
 end

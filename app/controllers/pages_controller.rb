@@ -5,7 +5,7 @@ class PagesController < ApplicationController
 
   def show
     @page = Page.find(params[:id])
-    if not @page.fetch_yahoo(:json)
+    if not @page.fetch_yahoo(params[:page], :json)
       redirect_to @page.url
     end
   end
@@ -38,10 +38,21 @@ class PagesController < ApplicationController
     
     if @pages.nil? or @pages.count == 0
       query = params[:query].gsub(/\+/, ' ')
-      Page.create(:name => "Auctions related to #{query}", :query => query)
-      @pages = Page.where(:query => query)
+      page = Page.create(:name => "Auctions related to #{query}", :query => query)
+      redirect_to page_path(page)
     end
     redirect_to page_path(@pages[0]) if @pages.count == 1  # Jump to page if only one result is shown
     @pages = @pages.page(params[:page])    
+  end
+
+
+  def seller
+    # search auction by seller id
+    seller = Seller.find_or_create_by_name(params[:seller])
+    seller.page = Page.create!(:name => 'Listing for ' + params[:seller]) if seller.page.nil?
+    @page = seller.page
+    if not @page.fetch_yahoo(:json)
+      redirect_to root_path
+    end
   end
 end

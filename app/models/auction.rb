@@ -9,41 +9,51 @@ class Auction
   
   validates_presence_of :auction_id
 
+  def initialize(attributes = {})
+    attributes.each do |name, value|
+      send("#{name}=", value)
+    end
+  end
+
+  def self.create_with_item(item)
+    new(:auction_id => item['AuctionID'], :title => item['Title'], :current_price => item['CurrentPrice'], :image_icon => item['Image'])
+  end
+  
+  def to_param
+    auction_id
+  end
 
   def self.parse_search_result(buffer, format)
-    auctions = Array.new
+    auctions = {}
+
     if format == :xml
       doc = Nokogiri::XML(buffer)
       doc.remove_namespaces!
       doc.xpath('//Item').each do |item|
-        auctions << Auction.new(:auction_id => item.xpath('.//AuctionID').inner_text.strip, 
-                               :title => item.xpath('.//Title').inner_text.strip,
-                               :current_price => item.xpath('.//CurrentPrice').inner_text.strip.to_f,
-                               :image_icon => item.xpath('.//Image').inner_text.strip)
+        auctions['auctions'] << Auction.new(:auction_id => item.xpath('.//AuctionID').inner_text.strip, 
+                                           :title => item.xpath('.//Title').inner_text.strip,
+                                           :current_price => item.xpath('.//CurrentPrice').inner_text.strip.to_f,
+                                           :image_icon => item.xpath('.//Image').inner_text.strip)
       end
     elsif format == :json
       doc = JSON.parse!(buffer.read.gsub(/^\((.*)\)$/,'\1'))
 
-      totalResultsAvailable = doc['ResultSet']['@attributes']['totalResultsAvailable'].to_i
-      if totalResultsAvailable > 0
+      auctions['total'] = doc['ResultSet']['@attributes']['totalResultsAvailable'].to_i
+      auctions['returned'] = doc['ResultSet']['@attributes']['totalResultsReturned'].to_i
+      auctions['first'] = doc['ResultSet']['@attributes']['firstResultPosition'].to_i
+      auctions['auctions'] = []
+      if auctions['returned'] == 1
+        item = doc['ResultSet']['Result']['Item']
+        auctions['auctions'] << Auction.create_with_item(item)
+      elsif auctions['returned'] > 1
         doc['ResultSet']['Result']['Item'].each do |item|
-          auctions << Auction.new(:auction_id => item['AuctionID'],
-                                  :title => item['Title'],
-                                  :current_price => item['CurrentPrice'],
-                                  :image_icon => item['Image'])
+          auctions['auctions'] << Auction.create_with_item(item)
         end
       end      
     end
     auctions
   end
 
-  
-  def initialize(attributes = {})
-    attributes.each do |name, value|
-      send("#{name}=", value)
-    end
-  end
-  
   def time_left
     return 'invalid' if @end_time.nil?
     duration = (@end_time - Time.now).floor
@@ -97,7 +107,4 @@ class Auction
   end  
 
   
-  def to_param
-    auction_id
-  end
 end

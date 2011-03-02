@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110228160704) do
+ActiveRecord::Schema.define(:version => 20110301140041) do
 
   create_table "addresses", :force => true do |t|
     t.string   "firstname"
@@ -44,8 +44,9 @@ ActiveRecord::Schema.define(:version => 20110228160704) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "category"
-    t.integer  "published",  :default => 0
+    t.integer  "published",  :default => 1
     t.integer  "pagetype",   :default => 0
+    t.integer  "seller_id"
   end
 
   add_index "pages", ["pagetype"], :name => "index_pages_on_pagetype"
@@ -85,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20110228160704) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
   end
 
   add_index "users", ["provider"], :name => "index_users_on_provider"

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  # validates_presence_of :email, :on => :create, :message => "can't be blank"
   
   def self.create_with_omniauth(auth)
     create! do |user|
