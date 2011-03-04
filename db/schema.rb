@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110301140041) do
+ActiveRecord::Schema.define(:version => 20110304004802) do
+
+  create_table "accounts", :force => true do |t|
+    t.integer  "user_id"
+    t.decimal  "balance",    :precision => 10, :scale => 0, :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "addresses", :force => true do |t|
     t.string   "firstname"
@@ -35,6 +42,22 @@ ActiveRecord::Schema.define(:version => 20110301140041) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "journals", :force => true do |t|
+    t.integer  "account_id"
+    t.decimal  "amount",      :precision => 10, :scale => 0, :default => 0
+    t.decimal  "balance",     :precision => 10, :scale => 0, :default => 0
+    t.text     "description"
+    t.string   "currency",                                   :default => "USD"
+    t.string   "code"
+    t.integer  "ref"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "journals", ["account_id"], :name => "index_journals_on_account_id"
+  add_index "journals", ["code"], :name => "index_journals_on_code"
+  add_index "journals", ["ref"], :name => "index_journals_on_ref"
 
   create_table "pages", :force => true do |t|
     t.string   "name"
@@ -87,9 +110,11 @@ ActiveRecord::Schema.define(:version => 20110301140041) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
+    t.integer  "status",     :default => 1
   end
 
   add_index "users", ["provider"], :name => "index_users_on_provider"
+  add_index "users", ["status"], :name => "index_users_on_status"
   add_index "users", ["uid"], :name => "index_users_on_uid"
 
 end

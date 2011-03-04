@@ -1,0 +1,11 @@
+
+<ul title='Search Result' selected="true">
+  <% for page in @pages %>
+    <li>
+      <%= link_to page.name, page_path(page) %>
+    </li>
+  <% end %>
+</ul>
+
+
+

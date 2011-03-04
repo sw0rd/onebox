@@ -1,6 +1,11 @@
 class PagesController < ApplicationController
   def index
     @pages = Page.order('updated_at desc').page(params[:page])
+    
+    respond_to do |format|
+      format.html
+      format.iphone
+    end
   end
 
   def show
@@ -40,9 +45,11 @@ class PagesController < ApplicationController
       query = params[:query].gsub(/\+/, ' ')
       page = Page.create(:name => "Auctions related to #{query}", :query => query)
       redirect_to page_path(page)
+    elsif @pages.count == 1
+      redirect_to page_path(@pages[0]) 
+    else
+      @pages = @pages.page(params[:page])    
     end
-    redirect_to page_path(@pages[0]) if @pages.count == 1  # Jump to page if only one result is shown
-    @pages = @pages.page(params[:page])    
   end
 
 

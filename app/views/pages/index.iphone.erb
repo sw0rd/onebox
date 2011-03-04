@@ -1,0 +1,23 @@
+<div class="toolbar">
+  <h1 id="pageTitle">Pages</h1>
+  <%= link_to 'back', '#', :id => 'backButton', :class => 'button' %>  
+  <%= link_to 'Search', '#searchForm', :class => 'button' %>
+</div>
+
+<ul title='Pages' selected="true">
+  <% for page in @pages %>
+    <li>
+      <%= link_to page.name, page_path(page) %>
+    </li>
+  <% end %>
+</ul>
+
+<% form_tag search_path, :id => 'searchForm', :class => 'dialog' do %>
+  <fieldset>
+    <h1>Search</h1>
+    <%= link_to 'Cancel', '#', :class => 'button leftButton', :type => 'cancel' %>
+    <%= link_to 'Search', '#', :class => 'button blueButton', :type => 'submit' %>  
+    <label for="query">Search</label>
+    <%= text_field_tag :query %>
+  </fieldset>
+<% end %>

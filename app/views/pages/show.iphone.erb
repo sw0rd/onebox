@@ -1,0 +1,11 @@
+
+
+<ul selected="true">
+<% @page.auctions['auctions'].each do |auction| %>
+  <li>
+    <%= link_to image_tag(auction.image_icon), auction_path(auction) %> 
+    <%= auction.title %>
+    <%= yen auction.current_price %>
+  </li>
+<% end %>
+</ul>
