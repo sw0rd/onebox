@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   # validates_presence_of :email, :on => :create, :message => "can't be blank"
   has_one :account, :dependent => :destroy
+  has_many :orders, :dependent => :destroy
   
   accepts_nested_attributes_for :account
   

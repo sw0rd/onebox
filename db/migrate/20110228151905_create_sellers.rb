@@ -4,7 +4,7 @@ class CreateSellers < ActiveRecord::Migration
       t.string :name
       t.integer :rating
       t.integer :order_count
-      t.integer :block
+      t.integer :block,         :default => false
 
       t.timestamps
     end

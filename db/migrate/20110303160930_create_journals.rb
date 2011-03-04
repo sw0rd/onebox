@@ -6,7 +6,7 @@ class CreateJournals < ActiveRecord::Migration
       t.decimal :balance,     :default => 0
       t.text :description
       t.string :currency,     :default => 'USD'
-      t.string :code
+      t.string :code,         :limit => 2
       t.integer :ref
 
       t.timestamps

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110304004802) do
+ActiveRecord::Schema.define(:version => 20110304152641) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
@@ -58,6 +58,25 @@ ActiveRecord::Schema.define(:version => 20110304004802) do
   add_index "journals", ["account_id"], :name => "index_journals_on_account_id"
   add_index "journals", ["code"], :name => "index_journals_on_code"
   add_index "journals", ["ref"], :name => "index_journals_on_ref"
+
+  create_table "orders", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "order_id"
+    t.datetime "date_req"
+    t.datetime "date_sent"
+    t.string   "method",          :limit => 10
+    t.decimal  "quote",                         :precision => 10, :scale => 0
+    t.integer  "ship_address_id"
+    t.text     "remark"
+    t.text     "internal"
+    t.string   "tracking"
+    t.integer  "status",                                                       :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "orders", ["order_id"], :name => "index_orders_on_order_id"
+  add_index "orders", ["status"], :name => "index_orders_on_status"
 
   create_table "pages", :force => true do |t|
     t.string   "name"
