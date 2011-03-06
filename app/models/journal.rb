@@ -1,22 +1,17 @@
 class Journal < ActiveRecord::Base
   belongs_to :account, :class_name => "Account", :foreign_key => "account_id"
   
-  def self.post(code, opts)
-    
+  def post()    
     transaction do
-      last_entry = self.where(:account_id => opts[:account_id]).last
-      last_balance = last_entry.nil? ? 0 : last_entry.balance
-    
-      journal = new(opts.merge(:code => code))      
+      last_balance = account.journals.last.nil? ? 0 : account.journals.last.balance
       if code == 'DR'
-        journal.balance = last_balance + opts[:amount]
-      elsif code == 'CR'
-        journal.balance = last_balance - opts[:amount]
+        self.balance = last_balance + amount
+      else
+        self.balance = last_balance - amount
       end
-      account = Account.find(opts[:account_id])
-      account.balance = journal.balance
+      account.balance = balance
       account.save
-      journal.save      
+      save      
     end
   end
   

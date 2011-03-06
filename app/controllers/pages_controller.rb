@@ -4,13 +4,12 @@ class PagesController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.iphone
     end
   end
 
   def show
     @page = Page.find(params[:id])
-    if not @page.fetch_yahoo(params[:page], :json)
+    if not @page.fetch_yahoo(params[:page])
       redirect_to @page.url
     end
   end

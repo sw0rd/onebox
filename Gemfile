@@ -17,6 +17,7 @@ gem 'mechanize'
 gem 'rd_searchlogic'
 gem 'meta_where'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git'
+# gem 'validates_email_format_of'
 
 group :development, :test do
   gem 'nifty-generators'
@@ -26,4 +27,9 @@ group :development, :test do
   gem 'yaml_db'
   gem 'faker'
   gem 'hirb'
+  gem 'cucumber-rails'
+  gem 'capybara'
+  gem 'database_cleaner'  
+  gem 'pickle'
+  gem 'factory_girl_rails'
 end

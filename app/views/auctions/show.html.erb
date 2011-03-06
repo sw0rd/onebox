@@ -3,7 +3,7 @@
 
 
 <% title @auction.title %>
-Seller: <%= link_to @auction.seller, seller_path(@auction.seller) %>(<%= @auction.rating %>) <br>
+Seller: <%= link_to @auction.seller, seller_path(@auction.seller) %> (<%= @auction.rating %>) <br>
 Price: <%= @auction.current_price %> <br>
 Start Time: <%= @auction.start_time %> <br>
 End Time: <%= @auction.end_time %> <br>
@@ -16,5 +16,5 @@ Time Left: <%= @auction.time_left %> <br>
 </div>
 
 <div id="desc">
-  <%= @auction.description.html_safe unless @auction.description.empty? %>
+  <%= @auction.description.html_safe unless @auction.description.nil? %>
 </div>

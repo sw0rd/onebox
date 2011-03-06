@@ -11,7 +11,6 @@ class Page < ActiveRecord::Base
 
   validates_presence_of :name, :on => :create, :message => "can't be blank"
 
-
   def fetch_yahoo(page = 1, format = :json)
     begin
       url = yahoo_search(:query => query, 
@@ -24,7 +23,7 @@ class Page < ActiveRecord::Base
       update_attributes(:published => false)
       return false
     end
-    @auctions = Auction.parse_search_result(buffer, format)
+    @auctions = Auction.parse_search_result(buffer)
   end
 
   def to_param

@@ -1,7 +1,7 @@
 
 <ul selected="true">
   <li>
-    Auction: <%= @auction.auction_id %> <br>
+    Auction: <%= @auction.code %> <br>
     Seller: <%= link_to @auction.seller, seller_path(@auction.seller) %>(<%= @auction.rating %>) <br>
     Price: <%= @auction.current_price %> <br>
     Start Time: <%= @auction.start_time %> <br>

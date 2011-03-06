@@ -10,13 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110304152641) do
+ActiveRecord::Schema.define(:version => 20110306152849) do
 
   create_table "accounts", :force => true do |t|
     t.integer  "user_id"
     t.decimal  "balance",    :precision => 10, :scale => 0, :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "power",      :precision => 10, :scale => 0
   end
 
   create_table "addresses", :force => true do |t|
@@ -32,6 +33,42 @@ ActiveRecord::Schema.define(:version => 20110304152641) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "auctions", :force => true do |t|
+    t.string   "title"
+    t.string   "code",          :limit => 20
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_icon"
+    t.string   "seller"
+    t.text     "description"
+    t.datetime "closed_date"
+    t.decimal  "closed_price",                :precision => 10, :scale => 0
+    t.decimal  "current_price",               :precision => 10, :scale => 0
+    t.decimal  "buy_price",                   :precision => 10, :scale => 0
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string   "location",      :limit => 50
+  end
+
+  add_index "auctions", ["code"], :name => "index_auctions_on_auction_id"
+  add_index "auctions", ["code"], :name => "index_auctions_on_code"
+  add_index "auctions", ["seller"], :name => "index_auctions_on_seller"
+
+  create_table "bids", :force => true do |t|
+    t.integer  "auction_id"
+    t.integer  "user_id"
+    t.decimal  "bid_price",                :precision => 10, :scale => 0
+    t.string   "status",     :limit => 10,                                :default => "bidding"
+    t.integer  "active",                                                  :default => 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bids", ["auction_id"], :name => "index_bids_on_auction_id"
+  add_index "bids", ["status"], :name => "index_bids_on_status"
+  add_index "bids", ["user_id"], :name => "index_bids_on_user_id"
 
   create_table "countries", :force => true do |t|
     t.string   "iso_name"
