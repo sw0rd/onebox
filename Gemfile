@@ -21,6 +21,7 @@ gem 'cancan', :git => 'git://github.com/ryanb/cancan.git'
 gem 'money'
 gem 'google_currency'
 gem 'yaml_db'
+gem 'hirb'
 
 
 # gem 'validates_email_format_of'
@@ -31,7 +32,6 @@ group :development, :test do
   gem 'mongrel'
   gem 'mocha'
   gem 'faker'
-  gem 'hirb'
   gem 'cucumber-rails'
   gem 'capybara'
   gem 'database_cleaner'  
