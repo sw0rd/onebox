@@ -236,6 +236,7 @@ DEPENDENCIES
   faker
   google_currency
   hirb
+  json
   kaminari
   mechanize
   meta_where
