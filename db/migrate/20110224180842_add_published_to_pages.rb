@@ -1,6 +1,6 @@
 class AddPublishedToPages < ActiveRecord::Migration
   def self.up
-    add_column :pages, :published, :integer, :default => true
+    add_column :pages, :published, :integer, :default => 1
     add_index :pages, :published
   end
 
