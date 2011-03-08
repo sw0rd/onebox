@@ -5,7 +5,7 @@ class CreateBids < ActiveRecord::Migration
       t.integer :user_id
       t.decimal :bid_price
       t.string :status,       :limit => 10, :default => 'bidding'
-      t.integer :active,      :default => true
+      t.integer :active,      :default => 1
 
       t.timestamps
     end
