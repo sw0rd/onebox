@@ -20,6 +20,7 @@ gem 'meta_where'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git'
 gem 'money'
 gem 'google_currency'
+gem 'yaml_db'
 
 # gem 'validates_email_format_of'
 
@@ -28,7 +29,6 @@ group :development, :test do
   gem 'ruby-debug19'
   gem 'mongrel'
   gem 'mocha'
-  gem 'yaml_db'
   gem 'faker'
   gem 'hirb'
   gem 'cucumber-rails'
