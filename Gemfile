@@ -22,6 +22,7 @@ gem 'money'
 gem 'google_currency'
 gem 'yaml_db'
 
+
 # gem 'validates_email_format_of'
 
 group :development, :test do
