@@ -6,5 +6,6 @@ class AddPublishedToPages < ActiveRecord::Migration
 
   def self.down
     remove_column :pages, :published
+    remove_index :pages, :published
   end
 end
