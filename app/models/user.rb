@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   scope :inactive, where(:status  => 0)
 
   delegate :balance,
+           :power,
            :to => :account
 
   def self.create_with_omniauth(auth)

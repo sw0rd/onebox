@@ -17,6 +17,9 @@ gem 'mechanize'
 gem 'rd_searchlogic'
 gem 'meta_where'
 gem 'cancan', :git => 'git://github.com/ryanb/cancan.git'
+gem 'money'
+gem 'google_currency'
+
 # gem 'validates_email_format_of'
 
 group :development, :test do
