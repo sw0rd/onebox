@@ -22,7 +22,10 @@ gem 'money'
 gem 'google_currency'
 gem 'yaml_db'
 gem 'hirb'
-
+gem 'memcache-client'
+gem 'geokit'
+gem 'geonames'
+gem 'delayed_job'
 
 # gem 'validates_email_format_of'
 

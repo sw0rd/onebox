@@ -64,6 +64,9 @@ GEM
     culerity (0.2.15)
     daemons (1.0.10)
     database_cleaner (0.5.2)
+    delayed_job (2.1.4)
+      activesupport (~> 3.0)
+      daemons
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -80,6 +83,8 @@ GEM
     ffi (0.6.3)
       rake (>= 0.8.7)
     gem_plugin (0.2.3)
+    geokit (1.5.0)
+    geonames (0.2.2)
     gherkin (2.3.3)
       json (~> 1.4.6)
     google_currency (1.2.0)
@@ -99,6 +104,7 @@ GEM
       treetop (~> 1.4.8)
     mechanize (1.0.0)
       nokogiri (>= 1.2.1)
+    memcache-client (1.8.5)
     meta_where (1.0.3)
       activerecord (~> 3.0.4)
       activesupport (~> 3.0.4)
@@ -232,13 +238,17 @@ DEPENDENCIES
   chronic_duration
   cucumber-rails
   database_cleaner
+  delayed_job
   factory_girl_rails
   faker
+  geokit
+  geonames
   google_currency
   hirb
   json
   kaminari
   mechanize
+  memcache-client
   meta_where
   mocha
   money

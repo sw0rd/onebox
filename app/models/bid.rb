@@ -19,7 +19,7 @@ class Bid < ActiveRecord::Base
   
   def place(code, price, qty=1)
     self.auction = Auction.includes(:bids).where(:code => code).first
-    self.auction.fetch_yahoo
+    self.auction.fetch_yahoo unless self.auction.nil?
     self.bid_price = price
     self.save
   end
